@@ -1,0 +1,22 @@
+#include <stdio.h>
+int where_is(char *str, char c, int *p){
+  int count = 0;
+  int index = 0;
+  int post[30];
+  int i;
+
+  while(*str != '\0'){
+    if(*str == c){
+      post[count] = index;
+      count++;
+    }
+    index++;
+    str++;
+  }
+
+  for(i = 0; i < index; i++){
+    *p = post[i];
+    p++;
+  }
+  return count;
+}

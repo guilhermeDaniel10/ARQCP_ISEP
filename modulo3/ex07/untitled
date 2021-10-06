@@ -1,0 +1,43 @@
+.section .data
+
+	.global ptr1
+ 
+.section .text
+  .global encrypt
+
+encrypt:
+  #prologue
+  pushl %ebp
+  movl %esp, %ebp
+  pushl %ebx
+  
+   	
+	movl ptr1, %ebx
+	movl $0, %eax
+	movl $0, %ecx
+	
+encriptador:
+		
+		movb (%esi), %cl 
+		cmpb $0, %cl
+		je end
+		
+		cmpb $32, %cl
+		je change
+		
+		cmpb $97, %cl
+		je change
+		
+		subl $2, (%esi)
+		incl %eax
+		
+change:
+		incl %esi
+		jmp encriptador 
+		
+end:
+		popl %ebx
+  # Epilogue		
+  movl %ebp, %esp # restore the previous stack pointer ("clear" the stack)
+  popl %ebp    # restore the previous stack frame pointer
+  ret
